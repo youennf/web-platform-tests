@@ -89,15 +89,6 @@ test_blob(function() {
   desc: "positive end parameter, size is min"
 });
 
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice();
-}, {
-  expected: "PASSSTRING",
-  type: "",
-  desc: "no contentType parameter, relativeContentType should be empty"
-});
-
 // Note the following bugs:
 // https://www.w3.org/Bugs/Public/show_bug.cgi?id=18521
 // https://www.w3.org/Bugs/Public/show_bug.cgi?id=18523
