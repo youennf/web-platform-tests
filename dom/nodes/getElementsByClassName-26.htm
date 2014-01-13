@@ -17,16 +17,14 @@
             <b class="text">text</b>
         </div>
         <div class="xt te">xt te</div>
-        
          <script type="text/javascript">
             test(function()
             {
                 var collection = document.getElementsByClassName("te xt");
-                
+
                 assert_equals(collection.length, 2);
                 assert_equals(collection[0].parentNode.nodeName, "BODY");
                 assert_equals(collection[1].parentNode.nodeName, "BODY");
             }, "multiple class attributes");
         </script>
-    
 </body></html>

@@ -39,7 +39,7 @@
             </tfoot>
         </table>
         <div class="xt te">xt te</div>
-        
+
         <script type="text/javascript">
             test(function()
             {
@@ -47,7 +47,7 @@
                 assert_equals(collection.length, 4);
                 var boldText = document.getElementsByTagName("b")[0];
                 document.getElementsByTagName("table")[0].tBodies[0].rows[0].cells[0].appendChild(boldText);
-                    
+
                 assert_equals(collection.length, 4);
                 assert_equals(collection[0].parentNode.nodeName, "DIV");
                 assert_equals(collection[1].parentNode.nodeName, "TABLE");
@@ -55,5 +55,4 @@
                 assert_equals(collection[3].parentNode.nodeName, "TR");
             }, "move item in collection order");
         </script>
-    
 </body></html>

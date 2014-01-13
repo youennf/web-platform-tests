@@ -35,7 +35,6 @@
         <dl class="foo">
             <dt class="foo">
                 </dt><dd class="foo">dd</dd>
-            
         </dl>
         <em class="foo">em</em>
         <font class="foo">font</font>
@@ -55,7 +54,7 @@
         <kbd class="foo">kbd</kbd>
         <map class="foo">
             <area class="foo"></area>
-        </map>                                  
+        </map>
         <menu class="foo">menu</menu>
         <noscript class="foo">noscript</noscript>
         <object class="foo">
@@ -97,101 +96,95 @@
         <ul class="foo">ul</ul>
         <var class="foo">var</var>
         <script type="text/javascript">
- 	  test(function ()
+    test(function ()
           {
-           var arrElements = new Array();
-                arrElements[0] = "HEAD";
-                arrElements[1] = "TITLE";
-                arrElements[2] = "META";
-                arrElements[3] = "LINK";
-                arrElements[4] = "BASE";
-                arrElements[5] = "SCRIPT";
-                arrElements[6] = "STYLE";
-                arrElements[7] = "BODY";
-                arrElements[8] = "A";
-                arrElements[9] = "ABBR";
-                arrElements[10] = "ACRONYM";
-                arrElements[11] = "ADDRESS";
-                arrElements[12] = "APPLET";
-                arrElements[13] = "B";
-                arrElements[14] = "BDO";
-                arrElements[15] = "BIG";
-                arrElements[16] = "BLOCKQUOTE";
-                arrElements[17] = "BR";
-                arrElements[18] = "BUTTON";
-                arrElements[19] = "CENTER";
-                arrElements[20] = "CITE";
-                arrElements[21] = "CODE";
-                arrElements[22] = "DEL";
-                arrElements[23] = "DFN";
-                arrElements[24] = "DIR";
-                arrElements[25] = "LI";
-                arrElements[26] = "DIV";
-                arrElements[27] = "DL";
-                arrElements[28] = "DT";
-                arrElements[29] = "DD";
-                arrElements[30] = "EM";
-                arrElements[31] = "FONT";
-                arrElements[32] = "FORM";
-                arrElements[33] = "LABEL";
-                arrElements[34] = "FIELDSET";
-                arrElements[35] = "LEGEND";
-                arrElements[36] = "H1";
-                arrElements[37] = "HR";
-                arrElements[38] = "I";
-                arrElements[39] = "IFRAME";
-                arrElements[40] = "IMG";
-                arrElements[41] = "INPUT";
-                arrElements[42] = "INS";
-                arrElements[43] = "KBD";
-                arrElements[44] = "MAP";
-                arrElements[45] = "AREA";
-                arrElements[46] = "MENU";
-                arrElements[47] = "NOSCRIPT";
-                arrElements[48] = "OBJECT";
-                arrElements[49] = "PARAM";
-                arrElements[50] = "OL";
-                arrElements[51] = "P";
-                arrElements[52] = "PRE";
-                arrElements[53] = "Q";
-                arrElements[54] = "S";
-                arrElements[55] = "SAMP";
-                arrElements[56] = "SELECT";
-                arrElements[57] = "OPTGROUP";
-                arrElements[58] = "OPTION";
-                arrElements[59] = "SMALL";
-                arrElements[60] = "SPAN";
-                arrElements[61] = "STRIKE";
-                arrElements[62] = "STRONG";
-                arrElements[63] = "SUB";
-                arrElements[64] = "SUP";
-                arrElements[65] = "TABLE";
-                arrElements[66] = "CAPTION";
-                arrElements[67] = "COL";
-                arrElements[68] = "COLGROUP";
-                arrElements[69] = "THEAD";
-                arrElements[70] = "TH";
-                arrElements[71] = "TBODY";
-                arrElements[72] = "TR";
-                arrElements[73] = "TD";
-                arrElements[74] = "TFOOT";
-                arrElements[75] = "TEXTAREA";
-                arrElements[76] = "TT";
-                arrElements[77] = "U";
-                arrElements[78] = "UL";
-                arrElements[79] = "VAR";
-            var bResult = true;
+           var arrElements = [
+                "HEAD",
+                "TITLE",
+                "META",
+                "LINK",
+                "BASE",
+                "SCRIPT",
+                "STYLE",
+                "BODY",
+                "A",
+                "ABBR",
+                "ACRONYM",
+                "ADDRESS",
+                "APPLET",
+                "B",
+                "BDO",
+                "BIG",
+                "BLOCKQUOTE",
+                "BR",
+                "BUTTON",
+                "CENTER",
+                "CITE",
+                "CODE",
+                "DEL",
+                "DFN",
+                "DIR",
+                "LI",
+                "DIV",
+                "DL",
+                "DT",
+                "DD",
+                "EM",
+                "FONT",
+                "FORM",
+                "LABEL",
+                "FIELDSET",
+                "LEGEND",
+                "H1",
+                "HR",
+                "I",
+                "IFRAME",
+                "IMG",
+                "INPUT",
+                "INS",
+                "KBD",
+                "MAP",
+                "AREA",
+                "MENU",
+                "NOSCRIPT",
+                "OBJECT",
+                "PARAM",
+                "OL",
+                "P",
+                "PRE",
+                "Q",
+                "S",
+                "SAMP",
+                "SELECT",
+                "OPTGROUP",
+                "OPTION",
+                "SMALL",
+                "SPAN",
+                "STRIKE",
+                "STRONG",
+                "SUB",
+                "SUP",
+                "TABLE",
+                "CAPTION",
+                "COL",
+                "COLGROUP",
+                "THEAD",
+                "TH",
+                "TBODY",
+                "TR",
+                "TD",
+                "TFOOT",
+                "TEXTAREA",
+                "TT",
+                "U",
+                "UL",
+                "VAR"];
 
                 var collection = document.getElementsByClassName("foo");
-                
-                if (collection.length == 80)
+                for (var x = 0; x < collection.length; x++)
                 {
-                    for (var x = 0; x < collection.length; x++)
-                    {
-                        assert_equals(collection[x].nodeName, arrElements[x]);
-                    }
+                    assert_equals(collection[x].nodeName, arrElements[x]);
                 }
 }, "big element listing");
         </script>
-    
 </body></html>

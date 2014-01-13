@@ -39,7 +39,7 @@
             </tfoot>
         </table>
         <div class="xt te">xt te</div>
-        
+
         <script type="text/javascript">
             test(function()
             {
@@ -49,7 +49,7 @@
                 newDiv.setAttribute("class", "text");
                 newDiv.innerHTML = "text newDiv";
                 document.getElementsByTagName("table")[0].tBodies[0].rows[0].cells[0].appendChild(newDiv);
-                    
+
                 assert_equals(collection.length, 5);
                 assert_equals(collection[0].parentNode.nodeName, "DIV");
                 assert_equals(collection[1].parentNode.nodeName, "DIV");
@@ -58,5 +58,4 @@
                 assert_equals(collection[4].parentNode.nodeName, "TR");
             }, "get elements in document then add element to collection");
         </script>
-    
 </body></html>
