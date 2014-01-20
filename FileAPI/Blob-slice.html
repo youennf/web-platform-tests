@@ -17,86 +17,43 @@ test_blob(function() {
   desc: "no-argument Blob slice"
 });
 
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice(-6);
-}, {
-  expected: "STRING",
-  type: "",
-  desc: "negative start parameter, relativeStart is positive"
-});
+test(function() {
+  var testData = [
+    [
+      ["PASSSTRING"],
+      [{start:  -6, contents: "STRING"},
+       {start: -12, contents: "PASSSTRING"},
+       {start:   4, contents: "STRING"},
+       {start:  12, contents: ""},
+       {start: 0, end:  -6, contents: "PASS"},
+       {start: 0, end: -12, contents: ""},
+       {start: 0, end:   4, contents: "PASS"},
+       {start: 0, end:  12, contents: "PASSSTRING"},
+       {start: 7, end:   4, contents: ""}]
+    ]
+  ];
 
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice(-12);
-}, {
-  expected: "PASSSTRING",
-  type: "",
-  desc: "negative start parameter, relativeStart is 0"
-});
+  testData.forEach(function(data, i) {
+    var blobs = data[0], tests = data[1];
+    tests.forEach(function(expectations, j) {
+      test(function() {
+        var blob = new Blob(blobs);
+        assert_true(blob instanceof Blob);
+        assert_false(blob instanceof File);
 
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice(4);
-}, {
-  expected: "STRING",
-  type: "",
-  desc: "positive start parameter, start is min"
-});
-
-test_blob(function() {
-  var blobTemp = new Blob(["PASSTRING"]);
-  return blobTemp.slice(12);
-}, {
-  expected: "",
-  type: "",
-  desc: "positive start parameter, size is min"
-});
-
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice(0, -6);
-}, {
-  expected: "PASS",
-  type: "",
-  desc: "negative end parameter, relativeEnd is positive"
-});
-
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice(0, -12);
-}, {
-  expected: "",
-  type: "",
-  desc: "negative end parameter, relativeEnd is 0"
-});
-
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice(0, 4);
-}, {
-  expected: "PASS",
-  type: "",
-  desc: "positive end parameter, end is min"
-});
-
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice(0, 12);
-}, {
-  expected: "PASSSTRING",
-  type: "",
-  desc: "positive end parameter, size is min"
-});
-
-test_blob(function() {
-  var blobTemp = new Blob(["PASSSTRING"]);
-  return blobTemp.slice(7, 4);
-}, {
-  expected: "",
-  type: "",
-  desc: "span is 0"
-});
+        test_blob(function() {
+          return expectations.end === undefined
+                 ? blob.slice(expectations.start)
+                 : blob.slice(expectations.start, expectations.end);
+        }, {
+          expected: expectations.contents,
+          type: "",
+          desc: "Slicing test: slice (" + i + "," + j + ")."
+        });
+      }, "Slicing test (" + i + "," + j + ").");
+    });
+  });
+}, "Slices");
 
 var invalidTypes = [
   "\xFF",
