@@ -165,14 +165,16 @@ function base_path() {
 }
 
 function test_login(test, origin, username, password, cookie) {
-  return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
+      //  if (cookie == "cookie1")
+      //    document.cookie = 'cookie=' + cookie;
       with_iframe(
         origin + base_path() +
         'resources/fetch-access-control-login.html')
         .then(test.step_func(function(frame) {
             var channel = new MessageChannel();
             channel.port1.onmessage = test.step_func(function() {
-                frame.remove();
+    //            frame.remove();
                 resolve();
               });
             frame.contentWindow.postMessage(

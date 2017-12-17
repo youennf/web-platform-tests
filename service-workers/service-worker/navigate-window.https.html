@@ -82,9 +82,12 @@ function validate_window(win, url, opts) {
         if (opts.includeUncontrolled) {
           expected.push({ url: BASE_URL + 'navigate-window.https.html',
                           frameType: 'auxiliary' });
-          expected.push({
-            url: host_info['HTTPS_ORIGIN'] + '/testharness_runner.html',
-            frameType: 'top-level' });
+
+          if (!window.testRunner) {
+            expected.push({
+              url: host_info['HTTPS_ORIGIN'] + '/testharness_runner.html',
+              frameType: 'top-level' });
+          }
         }
 
         assert_equals(resultList.length, expected.length,
