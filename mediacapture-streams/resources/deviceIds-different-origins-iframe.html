@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<body>
+    <script>
+async function grabDeviceIds()
+{
+    if (window.location.hash === "#withGetUserMedia")
+        await navigator.mediaDevices.getUserMedia({video : true});
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    parent.postMessage(devices.map(d => d.deviceId), "*");
+}
+grabDeviceIds();
+    </script>
+</body>
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<title>Device IDs on different origins should not match</title>
+<body>
+    <script src=/resources/testharness.js></script>
+    <script src=/resources/testharnessreport.js></script>
+    <script src=/common/get-host-info.sub.js></script>
+    <script>
+
+function loadFrame(src)
+{
+    const frame = document.createElement('iframe');
+    frame.src = get_host_info().HTTPS_REMOTE_ORIGIN + "/mediacapture-streams/resources/deviceIds-different-origins-iframe.html";
+    frame.allow = "camera;microphone";
+    document.body.appendChild(frame);
+    return frame;
+}
+
+promise_test(async () => {
+    const deviceIdsPromise = new Promise(resolve => {
+        window.onmessage = (event) => resolve(event.data);
+    });
+    const frame = loadFrame(get_host_info().HTTPS_REMOTE_ORIGIN + "/mediacapture-streams/resources/deviceIds-different-origins-iframe.html");
+
+    const crossOriginDeviceIds = await deviceIdsPromise;
+
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    for (device of devices)
+        assert_equals(crossOriginDeviceIds.indexOf(device.deviceId), -1, "deviceId '" + device.deviceId + "' should not match between two different origins");
+
+    frame.remove();
+}, "Check deviceIds on different origins without getUserMedia being granted");
+
+promise_test(async () => {
+    const deviceIdsPromise = new Promise(resolve => {
+        window.onmessage = (event) => resolve(event.data);
+    });
+    const frame = loadFrame(get_host_info().HTTPS_REMOTE_ORIGIN + "/mediacapture-streams/resources/deviceIds-different-origins-iframe.html#withGetUserMedia");
+
+    const crossOriginDeviceIds = await deviceIdsPromise;
+
+    await navigator.mediaDevices.getUserMedia({video : true});
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    for (device of devices)
+        assert_equals(crossOriginDeviceIds.indexOf(device.deviceId), -1, "deviceId '" + device.deviceId + "' should not match between two different origins");
+
+    frame.remove();
+}, "Check deviceIds on different origins after getUserMedia is granted");
+
+    </script>
+</body>
+
