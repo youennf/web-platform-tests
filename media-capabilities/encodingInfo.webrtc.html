@@ -172,6 +172,12 @@ validAudioCodecs.forEach(codec => {
     }
   }).then(ability => {
     assert_true(ability.supported);
+    assert_true(!!ability.webrtc);
+    assert_true(!!ability.webrtc.audio);
+
+    const pc = new RTCPeerConnection;
+    const transceiver = pc.addTransceiver("audio");
+    transceiver.setCodecPreferences([ability.webrtc.audio]);
   });
 }, "Test that encodingInfo returns supported true for the codec " + codec + " returned by RTCRtpSender.getCapabilities()")}
 );
@@ -210,6 +216,12 @@ validVideoCodecs.forEach(codec => {
     }
   }).then(ability => {
     assert_true(ability.supported);
+    assert_true(!!ability.webrtc);
+    assert_true(!!ability.webrtc.video);
+
+    const pc = new RTCPeerConnection;
+    const transceiver = pc.addTransceiver("video");
+    transceiver.setCodecPreferences([ability.webrtc.video]);
   });
 }, "Test that encodingInfo returns supported true for the codec " + codec + " returned by RTCRtpSender.getCapabilities()")}
 );
